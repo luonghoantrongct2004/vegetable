@@ -1,0 +1,11 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\SellingVegetable",
+    "\\SellingVegetable\\SellingVegetable",
+    "\\SellingVegetable\\SellingVegetable\\Views",
+    "\\SellingVegetable\\SellingVegetable\\Views\\Shared"
+  ],
+  "SelectedNode": "\\SellingVegetable\\SellingVegetable\\Views\\Shared\\_Layout.cshtml",
+  "PreviewInSolutionExplorer": false
+}

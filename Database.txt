@@ -1,0 +1,107 @@
+-- Bảng Admin
+CREATE TABLE Admin(
+    admin_id INT PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(50) NOT NULL,
+    PASSWORD VARCHAR(255) NOT NULL,
+    full_name VARCHAR(100),
+    email VARCHAR(100),
+    phone VARCHAR(20),
+    last_login DATETIME,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    deleted_at DATETIME
+);
+-- Bảng Customer
+CREATE TABLE Customer(
+    customer_id INT PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(50) NOT NULL,
+    PASSWORD VARCHAR(255) NOT NULL,
+    avatar VARCHAR(255),
+    address VARCHAR(255),
+    full_name VARCHAR(100),
+    email VARCHAR(100),
+    phone VARCHAR(20),
+    birthday DATE,
+    last_login DATETIME,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    active BOOLEAN
+);
+-- Bảng Brand
+CREATE TABLE Brand(
+    brand_id INT PRIMARY KEY AUTO_INCREMENT,
+    brand_name VARCHAR(50)
+);
+-- Bảng Category
+CREATE TABLE Category(
+    category_id INT PRIMARY KEY AUTO_INCREMENT,
+    category_name VARCHAR(50)
+);
+-- Bảng Feedback
+CREATE TABLE Feedback(
+    feedback_id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT,
+    product_id INT,
+    feedback_text TEXT,
+    rating INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    deleted_at DATETIME,
+    FOREIGN KEY(user_id) REFERENCES Customer(customer_id),
+    FOREIGN KEY(product_id) REFERENCES Product(product_id)
+);
+-- Bảng Category
+CREATE TABLE Category(
+    category_id INT PRIMARY KEY AUTO_INCREMENT,
+    category_name VARCHAR(50)
+);
+-- Bảng Product
+CREATE TABLE Product(
+    product_id INT PRIMARY KEY AUTO_INCREMENT,
+    product_name VARCHAR(100),
+    title VARCHAR(255),
+    description TEXT,
+    price DECIMAL(10, 2),
+    image VARCHAR(255),
+    video VARCHAR(255),
+    category_id INT,
+    brand_id INT,
+    stock_quantity INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    deleted_at DATETIME,
+    active BOOLEAN,
+    FOREIGN KEY(category_id) REFERENCES Category(category_id)
+);
+-- Bảng Shipper
+CREATE TABLE Shipper(
+    shipper_id INT PRIMARY KEY AUTO_INCREMENT,
+    shipper_name VARCHAR(100),
+    phone VARCHAR(20),
+    company VARCHAR(100),
+    ship_date DATETIME
+);
+-- Bảng Order
+CREATE TABLE `Order`(
+    -- Sử dụng backticks (`) vì "Order" là từ khóa trong SQL
+    order_id INT PRIMARY KEY AUTO_INCREMENT,
+    customer_id INT,
+    order_date DATETIME,
+    ship_date DATETIME,
+    static_order BOOLEAN,
+    paid BOOLEAN,
+    payment_date DATETIME,
+    payment_id INT,
+    note TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY(customer_id) REFERENCES Customer(customer_id)
+);
+-- Bảng Orderdetails
+CREATE TABLE Orderdetails(
+    orderdetail_id INT PRIMARY KEY AUTO_INCREMENT,
+    order_id INT,
+    product_id INT,
+    order_number INT,
+    quantity INT,
+    discount DECIMAL(10, 2),
+    total DECIMAL(10, 2),
+    ship_date DATETIME,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY(order_id) REFERENCES `Order`(order_id)
+);
