@@ -23,11 +23,6 @@ namespace Selling_Vegetable_26102023.Controllers
 			return View();
 		}
 
-		public IActionResult Privacy()
-		{
-			return View();
-		}
-
 		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 		public IActionResult Error()
 		{
